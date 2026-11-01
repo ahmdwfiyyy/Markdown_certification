@@ -11,6 +11,9 @@ function convertMarkdown() {
     return `<h${level}>${text}</h${level}>`;
   });
 
+  // Quotes: "> " at the start of a line (spaces allowed before)
+  html = html.replace(/^ *> (.*)$/gm, "<blockquote>$1</blockquote>");
+
   // Bold: **text** or __text__. The lookahead stops "***" from closing too early.
   html = html.replace(/\*\*(.+?)\*\*(?!\*)/g, "<strong>$1</strong>");
   html = html.replace(/__(.+?)__(?!_)/g, "<strong>$1</strong>");
@@ -24,7 +27,7 @@ function convertMarkdown() {
 
   // Links: [text](url)
   html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
-  
+
   // Lines are joined together with no separator.
   return html.replace(/\n/g, "");
 }
