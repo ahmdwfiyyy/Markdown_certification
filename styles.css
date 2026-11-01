@@ -1,32 +1,133 @@
+:root {
+  --bg: #f4f1ea;
+  --panel: #fffdf8;
+  --ink: #2b2a33;
+  --muted: #6f6b7a;
+  --accent: #d9480f;
+  --line: #e2ddd1;
+  --code-bg: #2b2a33;
+  --code-ink: #f8e9c9;
+}
+
 * {
-     box-sizing: border-box;
+  box-sizing: border-box;
 }
- body {
-     font-family: Arial, sans-serif;
-     padding: 20px;
+
+body {
+  margin: 0;
+  padding: 32px 20px;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
 }
- #markdown-input {
-     width: 100%;
-     height: 100px;
+
+body > h1 {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: -0.5px;
 }
- #html-output, #preview {
-     height: 100px;
-     display: inline-block;
-     width: 100%;
-     border: 1px solid #ccc;
-     padding: 10px;
-     margin: auto;
-     white-space: pre-wrap;
-     background-color: #f9f9f9;
+
+body > h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 10px auto 0;
+  border-radius: 2px;
+  background: var(--accent);
 }
- @media (min-width: 600px) {
-     #markdown-input, #html-output, #preview {
-         height: 200px;
-         margin: 0;
-    }
-     #container {
-         display: flex;
-         justify-content: space-evenly;
-         gap: 10px;
-    }
+
+.container {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(43, 42, 51, 0.06);
+}
+
+.container h2 {
+  margin: 0 0 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+
+#markdown-input,
+#html-output,
+#preview {
+  display: block;
+  width: 100%;
+  height: 220px;
+  padding: 12px;
+  overflow: auto;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+#markdown-input {
+  resize: vertical;
+  border: 2px solid var(--line);
+  font-family: "Consolas", "Courier New", monospace;
+  color: var(--ink);
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+#markdown-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+#html-output {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: "Consolas", "Courier New", monospace;
+  color: var(--code-ink);
+  background: var(--code-bg);
+}
+
+#preview {
+  border: 2px dashed var(--line);
+  line-height: 1.5;
+}
+
+#preview > :first-child {
+  margin-top: 0;
+}
+
+#preview blockquote {
+  margin: 8px 0;
+  padding: 6px 12px;
+  border-left: 4px solid var(--accent);
+  background: #fbefe6;
+  color: var(--muted);
+}
+
+#preview a {
+  color: var(--accent);
+}
+
+#preview img {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  #container {
+    display: flex;
+    gap: 18px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #markdown-input,
+  #html-output,
+  #preview {
+    height: 360px;
+  }
 }
