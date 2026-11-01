@@ -11,6 +11,14 @@ function convertMarkdown() {
     return `<h${level}>${text}</h${level}>`;
   });
 
+  // Bold: **text** or __text__. The lookahead stops "***" from closing too early.
+  html = html.replace(/\*\*(.+?)\*\*(?!\*)/g, "<strong>$1</strong>");
+  html = html.replace(/__(.+?)__(?!_)/g, "<strong>$1</strong>");
+
+  // Italic: *text* or _text_
+  html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+  html = html.replace(/_(.+?)_/g, "<em>$1</em>");
+  
   // Lines are joined together with no separator.
   return html.replace(/\n/g, "");
 }
