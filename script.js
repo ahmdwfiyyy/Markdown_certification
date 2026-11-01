@@ -18,6 +18,12 @@ function convertMarkdown() {
   // Italic: *text* or _text_
   html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
   html = html.replace(/_(.+?)_/g, "<em>$1</em>");
+
+  // Images: ![alt](src) - must run before links
+  html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2">');
+
+  // Links: [text](url)
+  html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
   
   // Lines are joined together with no separator.
   return html.replace(/\n/g, "");
